@@ -5,7 +5,7 @@ import About from "./Components/About";
 import { createContext, useState } from "react";
 import Alert from "./Components/Alert";
 import Footer from "./Components/Footer";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 export const ThemeContext = createContext(null);
 
@@ -39,19 +39,19 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <div id={theme}>
           <NavBar title="TextUtils" aboutText="About" text={theme === "dark" ? "Enable Light Mode" : "Enable Dark Mode"} toggleTheme={toggleTheme} theme={theme} />
           <Alert alertText={alert} />
           <Routes>
-            <Route path="/" element={<TextForm textTitle="Enter your text below" showAlert={showAlert} />} />
-            <Route path="About" element={<About />} />
+            <Route exact path="/" element={<TextForm textTitle="Enter your text below" showAlert={showAlert} />} />
+            <Route path="/About" element={<About />} />
           </Routes>
-          <Footer/>
+          <Footer />
         </div>
       </ThemeContext.Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
